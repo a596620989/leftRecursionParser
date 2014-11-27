@@ -1,7 +1,6 @@
 package com.ssc.lexer.analyser;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import com.ssc.lexer.token.Expression;
 import com.ssc.lexer.token.KeyWord;
@@ -21,21 +20,21 @@ public class Lexer {
 
 	//look forward
 	private int peek;
+	private char[] line;
+	private int index = 0;
 
-	//static keyWord set.
-	private HashSet<String> keyWordSet = new HashSet<String>();
 
 
-	public Lexer() throws IOException {
-		peek = System.in.read();
-		keyWordSet.add("true");
-		keyWordSet.add("false");
+	public Lexer()  {
 	}
 
-	public void scan() throws IOException {
+	public void scan(String line) throws IOException {
+		
+		
+		this.line = line.toCharArray();
+		nextChar();
 
-		// 13 stand for 'enter' key
-		while (peek != 13) {
+		while (peek != Constants.LINE_DELIMITER) {
 			ignoreSpace();
 			print(numLexer());
 			print(wordLexer());
@@ -115,7 +114,7 @@ public class Lexer {
 
 		String tmp = new String(result).trim();
 
-		if (keyWordSet.contains(tmp)) {
+		if (KeyWord.isKeyWord(tmp)) {
 			token = new KeyWord(tmp);
 		} else {
 			token = new Word(tmp);
@@ -129,8 +128,8 @@ public class Lexer {
 		return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 	}
 
-	private void nextChar() throws IOException {
-		peek = System.in.read();
+	private void nextChar() {
+		peek = this.line[index++];
 	}
 
 	/**

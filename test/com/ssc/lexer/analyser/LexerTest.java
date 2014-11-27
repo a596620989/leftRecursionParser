@@ -24,7 +24,7 @@ public class LexerTest {
 
 	@Test
 	public void test() throws IOException {
-		instance.scan();
+		instance.scan("int i<=10;");
 	}
 
 }

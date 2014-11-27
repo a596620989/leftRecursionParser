@@ -1,5 +1,7 @@
 package com.ssc.lexer.token;
 
+import java.util.HashSet;
+
 /**
  * key words, for example:
  *     if, true, false,while...
@@ -10,6 +12,16 @@ package com.ssc.lexer.token;
 
 public class KeyWord extends Token {
 	private String keyWord;
+	
+	//static keyWord set.
+	private static HashSet<String> keyWordSet = new HashSet<String>();
+	 
+	static{
+		keyWordSet.add("true");
+		keyWordSet.add("false");
+		keyWordSet.add("if");
+		keyWordSet.add("while");
+	}
 
 	public KeyWord(String keyWord) {
 		this.keyWord = keyWord;
@@ -27,5 +39,10 @@ public class KeyWord extends Token {
 	public String toString() {
 		return "KeyWord [keyWord=" + keyWord + "]";
 	}
+
+	public static boolean isKeyWord(String word){
+		return keyWordSet.contains(word);
+	}
+	
 
 }

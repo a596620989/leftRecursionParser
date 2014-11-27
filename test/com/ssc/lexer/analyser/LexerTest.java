@@ -22,9 +22,31 @@ public class LexerTest {
 		instance = null;
 	}
 
+	
 	@Test
-	public void test() throws IOException {
-		instance.scan("int i<=10;");
+	public void testDeclaration(){
+		instance.scan("int i;");
 	}
-
+	
+	@Test
+	public void testAssignment(){
+		instance.scan("i=100;");
+	}
+	
+	@Test
+	public void testDeclarationAndAssignment() {
+		instance.scan("int i=10;");
+	}
+	
+	@Test
+	public void testIf(){
+		//TODO: support '('&')'
+		//TODO: ArrayOutOfBoundException without LINE_DELIMITER ;
+		instance.scan("if i = 0;");
+	}
+	
+	@Test
+	public void testIf1(){
+		instance.scan("if true;");
+	}
 }

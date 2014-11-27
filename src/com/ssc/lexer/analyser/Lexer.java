@@ -28,7 +28,7 @@ public class Lexer {
 	public Lexer()  {
 	}
 
-	public void scan(String line) throws IOException {
+	public void scan(String line)  {
 		
 		
 		this.line = line.toCharArray();
@@ -43,7 +43,7 @@ public class Lexer {
 
 	}
 
-	private Expression expressionLexer() throws IOException {
+	private Expression expressionLexer() {
 		switch (peek) {
 		case '<':
 			nextChar();
@@ -52,6 +52,14 @@ public class Lexer {
 				return new Expression("<=");
 			} else {
 				return new Expression("<");
+			}
+		case '=':
+			nextChar();
+			if(peek == '='){
+				nextChar();
+				return new Expression("==");
+			}else{
+				return new Expression("=");
 			}
 		default:
 			return null;
@@ -67,7 +75,7 @@ public class Lexer {
 		}
 	}
 
-	private void ignoreSpace() throws IOException {
+	private void ignoreSpace() {
 		while (peek == ' ' || peek == '\t') {
 			nextChar();
 		}
@@ -76,7 +84,7 @@ public class Lexer {
 	/*
 	 * lexer number
 	 */
-	private Token numLexer() throws IOException {
+	private Token numLexer() {
 
 		if (!isDigit((char) peek)) {
 			return null;
@@ -97,7 +105,7 @@ public class Lexer {
 		return new Num(result);
 	}
 
-	private Token wordLexer() throws IOException {
+	private Token wordLexer() {
 
 		if (!isInvidialChar(peek)) {
 			return null;

@@ -1,12 +1,11 @@
 package com.ssc.lexer.analyser;
 
-import java.io.IOException;
-
 import com.ssc.lexer.token.Expression;
 import com.ssc.lexer.token.KeyWord;
 import com.ssc.lexer.token.Num;
 import com.ssc.lexer.token.Token;
 import com.ssc.lexer.token.Word;
+import com.ssc.lexer.token.SpecialSymbol;
 
 /**
  * create a lexer which can handler keyword true, false. and can handler number
@@ -30,6 +29,8 @@ public class Lexer {
 
 	public void scan(String line)  {
 		
+		//add end of line signal.
+		line = line + Constants.LINE_DELIMITER;
 		
 		this.line = line.toCharArray();
 		nextChar();
@@ -39,6 +40,7 @@ public class Lexer {
 			print(numLexer());
 			print(wordLexer());
 			print(expressionLexer());
+			print(specialSymbolLexer());
 		}
 
 	}
@@ -131,9 +133,26 @@ public class Lexer {
 		return token;
 
 	}
+	
+	private Token specialSymbolLexer() {
+
+
+		Token token = null;
+
+		String tmp = String.valueOf((char)peek);
+
+		if (SpecialSymbol.isSpecialSymbol(tmp)) {
+			nextChar();
+			token = new SpecialSymbol(tmp);
+		} 
+
+		return token;
+
+	}
 
 	private boolean isInvidialChar(int c) {
-		return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+		return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
+				|| (c >= '0' && c <= '9'));
 	}
 
 	private void nextChar() {

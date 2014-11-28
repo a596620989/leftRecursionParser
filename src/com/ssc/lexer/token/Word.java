@@ -4,6 +4,7 @@ package com.ssc.lexer.token;
  * words defined in programming language, for example, a variable name definition.
  * 
  * TODO: store words in symbol table.
+ * TODO: support words that mixed with number, such as num1, i3.
  * 
  * @version $Revision$
  * @author Your Name

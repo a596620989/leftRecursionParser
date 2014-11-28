@@ -21,6 +21,8 @@ public class KeyWord extends Token {
 		keyWordSet.add("false");
 		keyWordSet.add("if");
 		keyWordSet.add("while");
+		//TODO: sounds not a good idea?
+		keyWordSet.add(";");
 	}
 
 	public KeyWord(String keyWord) {

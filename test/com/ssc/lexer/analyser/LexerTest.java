@@ -1,14 +1,13 @@
 package com.ssc.lexer.analyser;
 
-import static org.junit.Assert.*;
 
-import java.io.IOException;
+import junit.framework.TestCase;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LexerTest {
+public class LexerTest extends TestCase{
 
 	private Lexer instance;
 	
@@ -38,6 +37,7 @@ public class LexerTest {
 		instance.scan("int i=10;");
 	}
 	
+	
 	@Test
 	public void testIf(){
 		//TODO: support '('&')'
@@ -48,5 +48,16 @@ public class LexerTest {
 	@Test
 	public void testIf1(){
 		instance.scan("if true;");
+	}
+	
+	//requirement-001:no delimiter should not throw exception
+	@Test
+	public void testDeLimiter(){
+		instance.scan("int i = 0");
+	}
+	
+	@Test
+	public void test11(){
+		instance.scan("int i3 = 0");
 	}
 }

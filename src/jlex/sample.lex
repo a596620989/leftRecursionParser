@@ -133,6 +133,7 @@ COMMENT_TEXT=([^/*\n]|[^*\n]"/"[^*\n]|[^/\n]"*"[^/\n]|"*"[^/\n]|"/"[^*\n])*
 	Utility.assert(str.length() == yytext().length() - 2);
 	return (new Yytoken(40,str,yyline,yychar,yychar + str.length()));
 }
+#EROS, unclosed string
 <YYINITIAL> \"{STRING_TEXT} {
 	String str =  yytext().substring(1,yytext().length());
 

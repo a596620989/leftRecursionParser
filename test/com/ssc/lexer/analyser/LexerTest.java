@@ -42,7 +42,7 @@ public class LexerTest extends TestCase{
 	public void testIf(){
 		//TODO: support '('&')'
 		//TODO: ArrayOutOfBoundException without LINE_DELIMITER ;
-		instance.scan("if i = 0;");
+		instance.scan("if (i = 0)");
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class LexerTest extends TestCase{
 	}
 	
 	@Test
-	public void test11(){
+	public void testWordMixedWithNumber(){
 		instance.scan("int i3 = 0");
 	}
 }
